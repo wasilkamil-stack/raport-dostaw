@@ -10,7 +10,7 @@ W pliku .CSV mamy dwie kolumny. dostawca - Nazwę dostawcy, oraz ilosć - ile pa
 W folderze "dane" dane mamy pliki dostawy.csv - dostawy dobre z błędnymi liniami(tak jak zazwyczaj zachowują się pliki),
 mają różnego rodzaju błędy.
 dostawy_ok.csv - idealny plik bez błędów.
-dostawy_pisty.csv. - Sprawdzić możemy przypadek graniczny kiedy z jakiegoś powodu plik jest pusty
+dostawy_pusty.csv. - Sprawdzić możemy przypadek graniczny kiedy z jakiegoś powodu plik jest pusty
 ## Co robi program
 Program przygotowuje gotowy raport z nieuporządkowanych plików .csv które są odczytywane, automatycznie zliczane,
 możemy ustawić próg dostaw aby widzieć poziom który będzie dla nas odpowiedni. Dodatkowo program ma zabezpieczenia przed
