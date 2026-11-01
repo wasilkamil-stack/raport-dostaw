@@ -63,15 +63,15 @@ def raport_dostaw(dostawy, prog):
 #       > zapisz pare (klucz, wartosc)
 # funkcja zwraca: nic
 
-def zapisz_csv(wynik, sciezka):
-    with open(sciezka, "w", encoding="utf-8") as plik:
-        plik.write("opis,wartosc\n")
-        for klucz in wynik:
-            wartosc = wynik[klucz]
-            if wartosc is None:
-                plik.write(klucz + "," + "Brak dostaw powyzej progu" + "\n")
-            else:
-                plik.write(klucz + "," + str(wartosc) + "\n")
+def zapisz_csv(wynik, sciezka): # Wynik to słownik z funkcji raport_dostaw a sciezka to adres do pliku do którego zapisuje
+    with open(sciezka, "w", encoding="utf-8") as plik: # Otwiera adres pliku jako plik, tryb w = zapis, nadpisuje stary plik
+        plik.write("opis,wartosc\n") # Zapisz na samym początku nagłówek "opis,wartosc"
+        for klucz in wynik:  # Przejdz pętlę dla każdego klucza w słowniku wynik
+            wartosc = wynik[klucz] # Stwórz zmienną wartość - Weź dane ze słownika wynik które stoją pod kluczem
+            if wartosc is None:    # Jeśli wartość jest None
+                plik.write(klucz + "," + "Brak dostaw powyzej progu" + "\n") # Zapisz klucz, Brak dostaw powyżej progu
+            else: # W innym przypadku zapisz
+                plik.write(klucz + "," + str(wartosc) + "\n") # Zapisz klucz oraz wartość "str" zamień liczbę na tekst
                 
 # Sekcja 1c - Funkcja wczytania danych
 
