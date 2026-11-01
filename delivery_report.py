@@ -76,7 +76,7 @@ def zapisz_csv(wynik, sciezka):
 # Sekcja 1c - Funkcja wczytania danych
 
 # wczytaj_dane(sciezka)
-# sciezka = dostawy.csv
+# sciezka = to napis z adresem pliku, jaki dokładnie plik chcę wczytać
 # krok 1: utworz pusty słownik
 # krok 2: otworz plik do odczytu (tryb "r")
 # krok 3: pomin pierwsza linie, bo nagłówek
@@ -86,20 +86,20 @@ def zapisz_csv(wynik, sciezka):
 #           dodaj do slownika: klucz = dostawca, wartosc = ilosc
 # funkcja zwraca: słownik
 
-def wczytaj_dane(sciezka):
+def wczytaj_dane(sciezka):    # Ta funkcja stworzy słownik w którym nazwa dostawcy jest kluczem a ilość palet jest wartościa
     dane = {}
     with open(sciezka, "r", encoding="utf-8") as plik:
-        plik.readline()
+        plik.readline()       # Pomija pierwszą linię bo to nagłówek 
         for linia in plik:
-            czesci = linia.split(",")
-            if len(czesci) !=2:
-                continue    
-            nazwa = czesci[0]
-            try:
-                ilosc = int(czesci[1])
-            except ValueError:
-                continue
-            dane[nazwa] = ilosc
+            czesci = linia.split(",")   # Tnę kazdą linię po przecinku na dwie części
+            if len(czesci) !=2:         # Jeżleli po cięciu nie mam dwóch elementów wtedy pomijam tą linię
+                continue                # Ta komenda pomija linię
+            nazwa = czesci[0]           # Utwórz zmienną nazwa, Nazwa to pierwszy element z pociętej lini - jest na pozycji [0]
+            try:                        # Python spróbuj coś dla mnie zrobić
+                ilosc = int(czesci[1])  # Zamień drugi element z tekstu na liczbę
+            except ValueError:          # Jeżeli napotkasz błąd ValueError przy zmianie
+                continue                # Wtedy pomiń tą linię
+            dane[nazwa] = ilosc         # Zapisz to w słowniku dane jako np. {"DHL": 200}
     return dane
 
 # 2. Dane wejściowe - dostawy palet
