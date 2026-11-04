@@ -13,34 +13,34 @@
 
 # 1. Funkcja obliczająca statystyki dostaw
 
-def raport_dostaw(dostawy, prog):
-    suma = 0
-    najwieksza = None
-    najwiekszy_dostawca = None
-    licznik_prog = 0
-    suma_prog = 0
+def raport_dostaw(dostawy, prog):      # Utwóz funkcję raport dostaw ( dostawy to słonik a próg jest liczbą)
+    suma = 0                           # Utwórz zmienną suma
+    najwieksza = None                  # Utwórz zmienna najwieksza - (Największa dostawa)
+    najwiekszy_dostawca = None         # Utwóz zmienną najwiekszy_dostawca
+    licznik_prog = 0                   # Utwóz zmienną licznik_prog - (Ile jest dostaw powyżej progu)
+    suma_prog = 0                      # Utwórz zmienną suma_prog - (Suma palet powyżej progu)
 
-    for dostawca in dostawy:
-        ilosc = dostawy[dostawca]
-        suma = suma + ilosc
+    for dostawca in dostawy:           # Utwórz pętle która przechodzi po każdym kluczu
+        ilosc = dostawy[dostawca]      # Utwórz zmienną ilość - (Jaka wartość znajduje się pod kluczem dostawca w słowniku dostawy)
+        suma = suma + ilosc            # Suma = dodaj każdą kolejną ilość po przechodzeniu przez kolejne klucze w pętli do sumy która na
+                                       # początku wynosi zero
+        if najwieksza is None:         # Jeżeli największa dostawa nie jest jeszcze znana
+            najwieksza = ilosc         # Wtedy największa dostawa równa się ilości którą znajdziesz jako pierwszą w pętli
+            najwiekszy_dostawca = dostawca # A największy dostawca równa sie dostawcy w tym właśnie obiegu pętli
+        elif ilosc > najwieksza:       # Jeżeli po kolejnym obiegu ilość będzie większa od dotychczasowej najwiekszej którą znalazłeś
+            najwieksza = ilosc         # wtedy nadpisz zmienną największa o nową największą wartość
+            najwiekszy_dostawca = dostawca  # Oraz nadpisz dostawcę dla największej wartości
 
-        if najwieksza is None:
-            najwieksza = ilosc
-            najwiekszy_dostawca = dostawca
-        elif ilosc > najwieksza:
-            najwieksza = ilosc
-            najwiekszy_dostawca = dostawca
+        if ilosc > prog:                     # Jeśli ilość palet jest większa od ustalonego progu (Nie chcemy aby równała się progowi)
+            licznik_prog = licznik_prog + 1  # Wtedy odnotuj to w zmiennej licznik_prog zliczając. Dodaj +1 przy każdeym obrocie spełniajacym warunek
+            suma_prog = suma_prog + ilosc    # Oraz policz sumę palet które znalazły się powyżej progu
 
-        if ilosc > prog:
-            licznik_prog = licznik_prog + 1
-            suma_prog = suma_prog + ilosc
+    if licznik_prog == 0:                    # Kiedy porównasz licznik_próg do 0 i okaże się że wynosi 0
+        srednia_prog = None                  # Wtedy srednia_prog = None, Nie pokazuj błedu. Zwróc None(Dzielenie przez zero zatrzymalo by program)
+    else:                                          # W innym przypadku
+        srednia_prog = suma_prog / licznik_prog     # Policz ile będzie wynosić średnia
 
-    if licznik_prog == 0:
-        srednia_prog = None
-    else:
-        srednia_prog = suma_prog / licznik_prog
-
-    return {
+    return {                                     # Zwróć mi wyniki
         "suma": suma,
         "najwieksza dostawa": najwieksza,
         "najwiekszy dostawca": najwiekszy_dostawca,
@@ -53,7 +53,7 @@ def raport_dostaw(dostawy, prog):
 # zapisz_csv(wynik, sciezka)
 # wynik  = słownik z wynikami raportu, czyli suma, 
 #           największa dostawa, licznik i średnia.
-# sciezka = raport.csv
+# sciezka = sciezka = napis z adresem pliku, do którego zapisuję, np. “raport.csv“
 # krok 1: otwórz plik w trybie do zapisu "write"
 # krok 2: zapisz w nim w pierwszej lini, opis, wartosc(zapisz nagłówek)
 # krok 3: dla kazdego klucza w wynik:
@@ -139,46 +139,3 @@ print(wynik_a)
 test_b = {"DHL": 200, "INPOST": 100, "UPS": 111}
 wynik_b = raport_dostaw(test_b, 200)
 print(wynik_b)
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-# 4. Zapisanie raportu do pliku CSV - Stara Metoda
-
-# zapisz_csv(raport_dostaw, "raport.csv")
-
-# plik = open("raport.csv", "w", encoding="utf-8")
-
-# plik.write("opis,wartosc\n")
-
-# for klucz in wynik:
-    # jeśli wartość jest None, to do pliku zapisz: Brak dostaw powyzej progu
-    # wartosc = wynik[klucz]
-    # if wartosc is None:
-        # plik.write(klucz + "," + "Brak dostaw powyzej progu" + "\n")
-    # else:    
-    # w przeciwnym razie do pliku zapisz: wartość
-        # plik.write(klucz + "," + str(wartosc) + "\n")
-
-
-
-
-
-
-
