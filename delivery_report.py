@@ -99,8 +99,8 @@ def zapisz_csv(wynik, sciezka): # Wynik to słownik z funkcji raport_dostaw a sc
                 plik.write(klucz + "," + "Brak dostaw powyzej progu" + "\n") # Zapisz klucz, Brak dostaw powyżej progu
             else: # W innym przypadku zapisz
                 plik.write(klucz + "," + str(wartosc) + "\n") # Zapisz klucz oraz wartość "str" zamień liczbę na tekst
-                
-# Sekcja 4 Główna - Dane wejściowe - dostawy palet
+
+# Sekcja 4: main() – wczytuje dostawy_ok.csv, liczy wynik, zapisuje raport.csv
 
 def main():
 
